@@ -76,7 +76,7 @@ var addingEmployee = () => {
                     addingEmployee()
                 } else {
                     //need function for html
-
+                    end()
                 }
             })
         })
