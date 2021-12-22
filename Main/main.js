@@ -1,3 +1,4 @@
+//linking the various classes
 const inquirer = require("inquirer")
 const fs = require("fs")
 const Manager = require("./lib/Manager")
@@ -5,6 +6,8 @@ const Intern = require("./lib/Intern")
 const Engineer = require("./lib/Engineer")
 const Employee = require("./lib/Employee")
 const employees = []
+
+
 //function for various prompts
 
 var addingEmployee = () => {
@@ -58,6 +61,7 @@ var addingEmployee = () => {
             ],
             name: "addEmployee"
         }])
+        //adding employee to class depending on which role selected
         .then(({addEmployee, extra}) => {
             let newEmpolyee 
             if(role === "Enginner"){
@@ -69,6 +73,7 @@ var addingEmployee = () => {
             if(role === "Manager"){
                 newEmpolyee = new Manager(name, id, email, extra)
             }
+            
             employees.push(newEmpolyee)
             employeeCard(newEmpolyee)
             .then(() => {
@@ -81,7 +86,7 @@ var addingEmployee = () => {
             })
         })
 }
-
+//creating html file
 var webpage = () => {
     
     const frontHtml = `<!DOCTYPE html>
@@ -105,7 +110,7 @@ var webpage = () => {
         console.log("start")
     })
 }
-
+//function that is responsible for creating the html card from the data gathered from inquirer
 var employeeCard=(employee)=> {
     return new Promise((req, res) => {
         const name = employee.name
@@ -161,7 +166,7 @@ var employeeCard=(employee)=> {
         })
     })
 }
-
+//finishes the html file. 
 var end = () => {
     const endHtml = `
     </div>
