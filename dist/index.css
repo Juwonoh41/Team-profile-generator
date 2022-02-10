@@ -9,3 +9,27 @@
     flex-wrap: wrap;
 }
 
+.employee{
+    color: white;
+    background-color: rgb(46, 86, 216);
+    min-height: 20rem;
+    margin: 1em;
+    max-width: 260px;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: black;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+}
+
+.card-body{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center ;
+}
+
+.content-item{
+    color: black;
+}
