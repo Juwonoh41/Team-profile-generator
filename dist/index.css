@@ -1,0 +1,11 @@
+.heading{
+    background-color: #ec4c5a;
+    color: rgb(243, 237, 237)
+}
+
+.team-member-card{
+    max-width: 1000px;
+    margin: 3em auto;
+    flex-wrap: wrap;
+}
+
