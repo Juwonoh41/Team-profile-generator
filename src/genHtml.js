@@ -1,54 +1,50 @@
-const { get } = require("http")
-const { generate } = require("rxjs")
-const internal = require("stream")
-const Engineer = require("../lib/Engineer")
 
 const getTeam = (team) => {
 
-    const getManager = () => {
+    const getManager = (m) => {
         return `
         <div class="card employee-card">
         <div class="card-header">
-            <h2 class="card-title">${manager.getName()}</h2>
-            <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${manager.getRole()}</h3>
+            <h2 class="card-title">${m.getName()}</h2>
+            <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${m.getRole()}</h3>
         </div>
         <div class="card-body">
             <ul class="list-group">
-                <li class="list-group-item">ID: ${manager.getId()}</li>
-                <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
-                <li class="list-group-item">Office number: ${manager.getOfficeNumber()}</li>
+                <li class="list-group-item">ID: ${m.getId()}</li>
+                <li class="list-group-item">Email: <a href="mailto:${m.getEmail()}">${m.getEmail()}</a></li>
+                <li class="list-group-item">Office number: ${m.getOfficeNumber()}</li>
             </ul>
         </div>
     </div>`
     }
-    const getIntern = () => {
+    const getIntern = (i) => {
         return `
         <div class="card employee-card">
         <div class="card-header">
-            <h2 class="card-title">${intern.getName()}</h2>
-            <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${intern.getRole()}</h3>
+            <h2 class="card-title">${i.getName()}</h2>
+            <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${i.getRole()}</h3>
         </div>
         <div class="card-body">
             <ul class="list-group">
-                <li class="list-group-item">ID: ${intern.getId()}</li>
-                <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${manager.getEmail()}</a></li>
-                <li class="list-group-item">Office number: ${intern.getSchool()}</li>
+                <li class="list-group-item">ID: ${i.getId()}</li>
+                <li class="list-group-item">Email: <a href="mailto:${i.getEmail()}">${i.getEmail()}</a></li>
+                <li class="list-group-item">School: ${i.getSchool()}</li>
             </ul>
         </div>
     </div>`
     }
-    const getEngineer = () => {
+    const getEngineer = (e) => {
         return `
         <div class="card employee-card">
         <div class="card-header">
-            <h2 class="card-title">${engineer.getName()}</h2>
-            <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${engineer.getRole()}</h3>
+            <h2 class="card-title">${e.getName()}</h2>
+            <h3 class="card-title"><i class="fas fa-mug-hot mr-2"></i>${e.getRole()}</h3>
         </div>
         <div class="card-body">
             <ul class="list-group">
-                <li class="list-group-item">ID: ${engineer.getId()}</li>
-                <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${manager.getEmail()}</a></li>
-                <li class="list-group-item">Office number: ${engineer.getGithub()}</li>
+                <li class="list-group-item">ID: ${e.getId()}</li>
+                <li class="list-group-item">Email: <a href="mailto:${e.getEmail()}">${e.getEmail()}</a></li>
+                <li class="list-group-item">github: ${e.getGithub()}</li>
             </ul>
         </div>
     </div>`
@@ -62,10 +58,10 @@ const getTeam = (team) => {
     .map(engineer => getEngineer(engineer)).join(""))
     
     page.push(team.filter(employee =>employee.getRole() === "Intern")
-    .map(engineer => getEngineer(engineer)).join(""))
+    .map(intern => getIntern(intern)).join(""))
 }
 
-module.exports = (team) => {
+module.exports = (members) => {
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -92,7 +88,7 @@ module.exports = (team) => {
     <div class = "card-container">
         <div class = "row">
             <div class="team-member-card col-12 d-flex justify-content-center">
-            ${getTeam(team)}
+            ${getTeam(members)}
             </div>
         </div>
     </div>

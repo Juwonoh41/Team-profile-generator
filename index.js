@@ -5,6 +5,8 @@ const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs');
 
+const DIST_DIR = path.resolve(__dirname, 'dist');
+const distPath = path.join(DIST_DIR, 'team.html');
 const template = require("./src/genHtml")
 
 const members = []
@@ -88,16 +90,16 @@ function team(){
             'Intern',
             "I'm done.",
           ],
-        },
-      ])
-      .then((userChoice) => {
-        switch (userChoice.memberChoice) {
+        },]).then(function (userChoice) {
+        switch(userChoice.memberRole) {
           case 'Engineer':
             engineer();
-            break;
+           
+            break
           case 'Intern':
             intern();
-            break;
+            
+            break
           default:
             done();
         }
@@ -166,7 +168,7 @@ function engineer(){
               answer.eGithub
             );
             members.push(engineer);
-            id.push(answers.engineerId);
+            id.push(answer.eId);
             team();
           });
 }
@@ -241,7 +243,7 @@ function done(){
     if (!fs.existsSync(DIST_DIR)) {
         fs.mkdirSync(DIST_DIR);
       }
-      fs.writeFileSync(distPath, render(teamMembers), 'utf-8');
+      fs.writeFileSync(distPath, template(members), 'utf-8');
     }
   
     manager();
